@@ -42,24 +42,27 @@ b4 = [zeros(1,len_L) phi_2R];
 psi_0 = [1 1 0 0]' * (1/sqrt(2));
 
 
-time = 0:1e-15:1e-11;
+time = 0:1e-11:1e-7;
 T = length(time);
 
-psi_t = zeros(T,4);
+p_t = zeros(4,T);
 
-psi_t_x = zeros(T,len_X);
+psi_t1 = zeros(T,len_L+len_R);
+psi_t2 = zeros(T,len_L+len_R);
 
 
 for i = 1:T
-   U = expm(-1i * H * time(i)/hbar);
-   psi_t(i,:) = U*psi_0;
+   for j = 1:length(x)
+   U = expm(-1i * H * time(i));
 
-   psi_t_x(i,:) = psi_t(i,1)*b1 + psi_t(i,2)*b2;
+   psi_t1(i,j) = U(:) * b1;
+   psi_t2(i,j) = U(:) * b2;
 end
 
 
+
 figure(1)
-imagesc(x,time,abs(psi_t_x).^2);
+imagesc(x,time,abs(psi_t1).^2);
 shading flat
 colorbar;
 xlabel('position');

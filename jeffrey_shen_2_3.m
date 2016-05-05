@@ -25,4 +25,12 @@ disp(num2str(H*toeV*1000))
 disp(' ')
 disp('With eigen energies of:')
 disp(' ')
-disp(num2str(eig(H*toeV*1000)))
+
+[vec,val] = eig(H*toeV*1000);
+
+disp(eig(H*toeV*1000))
+disp(' ')
+disp('With corresponding eigen vectors of:')
+disp(' ')
+disp(num2str(vec))
+
